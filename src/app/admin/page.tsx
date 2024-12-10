@@ -44,7 +44,7 @@ const page = () => {
             }
           />
           <input
-            type="text"
+            type="password"
             className="bg-blue-100 px-3 py-4 rounded-lg"
             placeholder="Enter your Password "
             onChange={(e: any) =>

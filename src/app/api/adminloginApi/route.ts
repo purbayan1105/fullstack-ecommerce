@@ -10,12 +10,12 @@ export async function POST(request: NextRequest) {
   try {
     const admin = await Admin.findOne({ email });
     if (!admin) {
-      return NextResponse.json({ message: "admin not found" }, { status: 401 });
+      throw new Error("Admin not found");
     }
 
     const isMatched = bcrypt.compareSync(password, admin.password);
     if (!isMatched) {
-      return NextResponse.json({ message: "wrong password" }, { status: 401 });
+      throw new Error("Password does not match");
     }
     const response = NextResponse.json(
       { message: "Login Successful" },
@@ -33,10 +33,7 @@ export async function POST(request: NextRequest) {
     response.cookies.set("adminauthToken", adminToken);
     return response;
   } catch (error: any) {
-    console.log("error at admin login api", error.response.data.message);
-    return NextResponse.json(
-      { message: error.response.data.message },
-      { status: 501 }
-    );
+    console.log("error at admin login api", error.message);
+    return NextResponse.json({ message: error.message }, { status: 501 });
   }
 }
