@@ -169,6 +169,7 @@ const page = () => {
             <select
               name=""
               id=""
+              defaultValue=""
               className="bg-blue-100 px-4 py-4 rounded-lg w-[40%]"
               onChange={(e: any) =>
                 setProductData({ ...productData, category: e.target.value })
