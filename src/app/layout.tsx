@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 import UserProvider from "@/context/userProvider";
 import Navabar from "@/components/Navbar";
+import { ReactQueryComponent } from "@/components/ReactQuery/ReactQueyComp";
+import { Providers } from "@/components/NextUIProvider/Provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,15 +30,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <UserProvider>
-          <Navabar />
-          {children}
-        </UserProvider>
-        <ToastContainer />
-      </body>
-    </html>
+    <ReactQueryComponent>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <Providers>
+            <UserProvider>
+              <Navabar />
+              {children}
+            </UserProvider>
+            <ToastContainer />
+          </Providers>
+        </body>
+      </html>
+    </ReactQueryComponent>
   );
 }

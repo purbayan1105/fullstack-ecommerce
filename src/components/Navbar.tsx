@@ -9,6 +9,7 @@ import { FiSearch } from "react-icons/fi";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import ManageAccount from "./ManageAccount";
+import SearchBar from "./SearchBar";
 
 const Navabar = () => {
   const [toggle, setToggle] = useState(false);
@@ -63,7 +64,9 @@ const Navabar = () => {
           <CiHeart size={25} color="red" />
           <FaShoppingCart color="lightgreen" size={25} />
         </div>
-        <div className="hidden lg:block">{/*Here will be searchbar */}</div>
+        <div className="hidden lg:block">
+          <SearchBar />
+        </div>
 
         <div className="lg:flex justify-center items-center gap-5 hidden">
           <div
@@ -138,7 +141,7 @@ const Navabar = () => {
         <div
           ref={toggleRef}
           className="space-y-8 text-xl absolute z-20 top-20 bg-gray-100 w-full px-6 py-6">
-          {/* Here will be a searchbar */}
+          <SearchBar />
 
           <div className="space-y-5">
             <Link href="/category">
