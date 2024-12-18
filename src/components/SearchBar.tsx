@@ -66,22 +66,18 @@ const SearchBar = () => {
             {data && data.length > 0 ? (
               data?.map((item: any) => {
                 return (
-                  <>
+                  <div
+                    className="py-2 cursor-pointer hover:bg-[#0000ffbe] hover:text-white hover:rounded-lg px-2"
+                    key={item._id}>
                     <div
-                      className="py-2 cursor-pointer hover:bg-[#0000ffbe] hover:text-white hover:rounded-lg px-2"
-                      key={item._id}>
-                      {/* <Link href={`/allproducts/${item._id}`}> */}
-
-                      <div
-                        onClick={() => {
-                          router.push(`/allproducts/${item._id}`);
-                          setInput("");
-                        }}>
-                        {item.title}
-                      </div>
-                      {/* </Link> */}
+                      onClick={() => {
+                        router.push(`/allproducts/${item._id}`);
+                        setInput("");
+                      }}>
+                      {item.title}
                     </div>
-                  </>
+                    {/* </Link> */}
+                  </div>
                 );
               })
             ) : (

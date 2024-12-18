@@ -7,6 +7,7 @@ import UserProvider from "@/context/userProvider";
 import Navabar from "@/components/Navbar";
 import { ReactQueryComponent } from "@/components/ReactQuery/ReactQueyComp";
 import { Providers } from "@/components/NextUIProvider/Provider";
+import Menubar from "@/components/Menubar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,6 +38,7 @@ export default function RootLayout({
           <Providers>
             <UserProvider>
               <Navabar />
+              <Menubar />
               {children}
             </UserProvider>
             <ToastContainer />

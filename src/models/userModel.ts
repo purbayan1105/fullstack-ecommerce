@@ -7,6 +7,36 @@ const OtpDetailsSchema = new Schema({
   expiry_of_otp: String,
 });
 
+const CartItemSchema = new Schema({
+  productId: { type: Schema.Types.ObjectId, required: true, ref: "products" },
+  title: String,
+  description: String,
+  price: String,
+  imageUrls: [String],
+  quantity: { type: Number, default: 1 },
+  isChecked: {
+    type: Boolean,
+    default: true,
+  },
+  isCheckedOut: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const FavouriteItemSchema = new Schema({
+  productId: { type: Schema.Types.ObjectId, required: true, ref: "products" },
+  title: String,
+  description: String,
+  price: String,
+  sku: String,
+  imageUrls: [String],
+  isFavourite: {
+    type: Boolean,
+    default: true,
+  },
+});
+
 const AddressSchema = new Schema({
   firstName: {
     type: String,
@@ -81,6 +111,8 @@ export const UserModel = new Schema({
     type: Boolean,
     default: false,
   },
+  addToCart: [CartItemSchema],
+  favouriteItems: [FavouriteItemSchema],
 });
 
 export const User = mongoose.models.user || mongoose.model("user", UserModel);

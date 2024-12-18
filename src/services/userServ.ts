@@ -26,3 +26,36 @@ export async function logoutUser() {
   const response = await httpAxios.post("/api/logoutApi");
   return response.data;
 }
+export async function addToCartFn({ email, product }: any) {
+  try {
+    const response = await httpAxios.post("/api/addtocartApi", {
+      email,
+      product,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function favaddFn({ email, product }: any) {
+  const response = await httpAxios.post("/api/favouriteApi", {
+    email,
+    product,
+  });
+  return response.data;
+}
+
+export async function favdeleteFn({ email, product }: any) {
+  const response = await httpAxios.patch("/api/favouriteApi", {
+    email,
+    product,
+  });
+  return response.data;
+}
+
+export async function getFavouriteProduct(email: String) {
+  const response = await httpAxios.get("/api/favouriteApi", {
+    params: { email },
+  });
+  return response.data;
+}

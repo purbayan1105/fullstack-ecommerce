@@ -1,5 +1,13 @@
+import Banner from "@/components/Banner";
+import Trending from "@/components/TrendingPhonese";
+
 const page = () => {
-  return <div>Enter</div>;
+  return (
+    <>
+      <Banner />
+      <Trending />
+    </>
+  );
 };
 
 export default page;
