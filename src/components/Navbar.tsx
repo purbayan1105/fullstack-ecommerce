@@ -137,6 +137,8 @@ const Navabar = () => {
           )}
         </div>
       </div>
+
+      {/* For Mobile */}
       {toggle && (
         <div
           ref={toggleRef}
@@ -198,7 +200,10 @@ const Navabar = () => {
                 {context.user.data.firstName}
               </p>
             ) : (
-              <p className="text-white select-none">Log in</p>
+              <Link href="/login">
+                {" "}
+                <p className="text-white select-none">Log in</p>
+              </Link>
             )}
             {context.user ? <IoIosArrowDown color="white" /> : ""}
           </div>
