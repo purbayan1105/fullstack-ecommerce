@@ -8,6 +8,7 @@ import Navabar from "@/components/Navbar";
 import { ReactQueryComponent } from "@/components/ReactQuery/ReactQueyComp";
 import { Providers } from "@/components/NextUIProvider/Provider";
 import Menubar from "@/components/Menubar";
+import Footer from "@/components/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,8 +39,10 @@ export default function RootLayout({
           <Providers>
             <UserProvider>
               <Navabar />
+
               <Menubar />
               {children}
+              <Footer />
             </UserProvider>
             <ToastContainer />
           </Providers>

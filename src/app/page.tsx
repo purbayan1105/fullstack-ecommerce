@@ -12,7 +12,6 @@ const page = () => {
       <Trending />
       <Macboook />
       <Tablet />
-      <Footer />
     </>
   );
 };

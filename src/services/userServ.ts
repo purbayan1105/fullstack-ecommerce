@@ -59,3 +59,40 @@ export async function getFavouriteProduct(email: String) {
   });
   return response.data;
 }
+
+export async function getCartFn() {
+  const response = await httpAxios.get("/api/addtocartApi");
+  return response.data;
+}
+export async function updateQuantityFn({
+  email,
+  id,
+  quantity,
+  operation,
+}: any) {
+  try {
+    const response = await httpAxios.patch("/api/addtocartApi", {
+      email,
+      id,
+      quantity,
+      operation,
+    });
+    return response.data;
+  } catch (error: any) {
+    console.log("error at add to cart api patch", error);
+  }
+}
+export async function checkBoxFn({ email, id, isChecked, operation }: any) {
+  const response = await httpAxios.patch("/api/addtocartApi", {
+    email,
+    id,
+    isChecked,
+    operation,
+  });
+  return response.data;
+}
+
+export async function deleteItemFromCartFn(data: any) {
+  const response = await httpAxios.patch("/api/deleteCartApi", data);
+  return response.data;
+}

@@ -21,7 +21,7 @@ const BackToStart = () => {
   };
 
   return (
-    <div className="absolute text-white right-4">
+    <div className="absolute text-white lg:right-4 right-5 bottom-3">
       <div
         className={`flex justify-center items-center gap-2 cursor-pointer  ${
           showText && "bg-white px-3 py-2 rounded-full text-black"

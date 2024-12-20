@@ -21,7 +21,7 @@ body {
 }
 
 .showText-animation {
-  animation: rightSidein forwards 1s ease-in;
+  animation: rightSidein forwards 300ms ease-in;
   opacity: 1;
 }
 

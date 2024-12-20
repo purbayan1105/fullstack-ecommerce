@@ -1,11 +1,20 @@
 "use client";
+
 import { getProducts } from "@/services/addProductServ";
-import { ProductProps } from "@/utils/ProductType";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useState } from "react";
 import Slider from "react-slick";
+
+export type TabletsProps = {
+  _id: string;
+  title: string;
+  category: string;
+  description: string;
+  price: string;
+  imageUrls: string[];
+};
 
 const Tablet = () => {
   const { data, isLoading, isError } = useQuery({
@@ -13,11 +22,9 @@ const Tablet = () => {
     queryFn: async () => {
       const response = await getProducts();
       const result = response.data;
-      const onlyTablets = result.filter((items: ProductProps) => {
+      const onlyTablets = result.filter((items: TabletsProps) => {
         return items.category === "tablets";
       });
-
-      console.log("onlyTablets", onlyTablets);
 
       return onlyTablets;
     },
@@ -36,7 +43,7 @@ const Tablet = () => {
   };
   return (
     <>
-      <div className=" lg:h-[80dvh] h-auto grid lg:grid-cols-3 justify-around items-center px-8 lg:px-10 py-8">
+      <div className=" lg:h-[80dvh] h-auto grid grid-cols-1 lg:grid-cols-3 justify-around items-center px-8 lg:px-10 py-8">
         <div className="lg:col-span-2 lg:pr-48">
           <div className="">
             <p className="font-bold text-6xl text-gray-400">All New</p>
@@ -62,11 +69,11 @@ const Tablet = () => {
           </div>
         </div>
         <div className=" flex flex-col justify-end mt-6 lg:mt-0">
-          {data?.map((items: ProductProps) => {
+          {data?.map((items: TabletsProps) => {
             return (
               <div className="" key={items._id}>
                 <Slider {...imageSettings}>
-                  {items.imageUrls.map((imageUrl: string, index: number) => {
+                  {items.imageUrls.map((imageUrl: any, index: number) => {
                     return (
                       <Image
                         src={imageUrl}
