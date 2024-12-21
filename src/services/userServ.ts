@@ -96,3 +96,11 @@ export async function deleteItemFromCartFn(data: any) {
   const response = await httpAxios.patch("/api/deleteCartApi", data);
   return response.data;
 }
+
+export async function shippingAddressFn({ email, formData }: any) {
+  const response = await httpAxios.post("/api/adressformApi", {
+    email,
+    formData,
+  });
+  return response.data;
+}

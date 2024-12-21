@@ -158,7 +158,7 @@ const CartItem = ({ data }: { data: CartItemProps[] }) => {
   };
 
   useEffect(() => {
-    console.log(isSelected);
+    console.log("selection", isSelected);
   }, [isSelected]);
 
   return (
