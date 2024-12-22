@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { userSignup } from "@/services/userServ";
 import { FormType, ZodSchema } from "@/utils/zodSchema";
 import { FaFileUpload } from "react-icons/fa";
+import FileUploadComp from "@/components/FileUploadComp";
 
 const Page = () => {
   const [profile, setProfile] = useState<File | null>(null);
@@ -62,8 +63,8 @@ const Page = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col justify-center items-center h-screen space-y-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="py-6">
+        <div className="flex flex-col justify-center items-center h-screen space-y-5 ">
           <div className="text-3xl font-semibold">
             User
             <span className="text-blue-800"> Sign Up</span> Form
@@ -141,7 +142,7 @@ const Page = () => {
               {errors.confirmPassword.message}
             </span>
           )}
-          <div className="relative">
+          {/* <div className="relative">
             <input
               type="file"
               accept="image/*"
@@ -149,7 +150,9 @@ const Page = () => {
               onChange={(e: any) => setProfile(e.target.files?.[0])}
             />
             <FaFileUpload size={30} className="absolute z-10 right-10 top-3" />
-          </div>
+          </div> */}
+
+          <FileUploadComp profile={profile} setProfile={setProfile} />
           <button
             className="bg-indigo-700 text-slate-100 px-3 py-2 rounded-lg font-semibold w-[300px] lg:w-[400px]"
             type="submit"
