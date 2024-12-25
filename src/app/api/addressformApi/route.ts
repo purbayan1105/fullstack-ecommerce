@@ -20,9 +20,11 @@ export async function POST(request: NextRequest) {
       telephone,
     } = formData;
 
+    // console.log(email);
+
     const user = await User.findOne({ email });
     if (!user) {
-      return NextResponse.json({ message: "user not found" }, { status: 409 });
+      throw new Error("User not found");
     }
     user.shippingAddress = {
       firstName: firstName,
@@ -44,7 +46,7 @@ export async function POST(request: NextRequest) {
   } catch (error: any) {
     console.log(error);
     return NextResponse.json(
-      { message: error?.response?.data?.message },
+      { message: "error at creating address" },
       { status: 501 }
     );
   }

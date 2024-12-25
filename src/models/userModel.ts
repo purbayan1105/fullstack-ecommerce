@@ -113,6 +113,7 @@ export const UserModel = new Schema({
   },
   addToCart: [CartItemSchema],
   favouriteItems: [FavouriteItemSchema],
+  shippingAddress: AddressSchema,
 });
 
 export const User = mongoose.models.user || mongoose.model("user", UserModel);

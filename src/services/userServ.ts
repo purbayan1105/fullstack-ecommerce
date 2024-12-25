@@ -98,7 +98,7 @@ export async function deleteItemFromCartFn(data: any) {
 }
 
 export async function shippingAddressFn({ email, formData }: any) {
-  const response = await httpAxios.post("/api/adressformApi", {
+  const response = await httpAxios.post("/api/addressformApi", {
     email,
     formData,
   });

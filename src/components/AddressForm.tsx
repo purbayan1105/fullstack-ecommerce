@@ -33,18 +33,19 @@ function AddressForm() {
     e.preventDefault();
     console.log("Form Submitted:", formData);
 
-    const email = context.user.data.email;
+    const email = context?.user?.data?.email; // here condition operator is important
     console.log(email);
 
     try {
-      await shippingAddressFn({
+      const response = await shippingAddressFn({
         email,
         formData,
       });
 
-      toast.success("address update successful");
-    } catch (error) {
+      toast.success(response.message);
+    } catch (error: any) {
       console.log("error at addressform", error);
+      toast.error(error.response.data.message);
     }
     setSubmitted(true);
   };
