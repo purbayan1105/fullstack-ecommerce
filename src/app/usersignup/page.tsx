@@ -43,7 +43,7 @@ const Page = () => {
     const uploadResponse = await axios.post(
       "https://api.cloudinary.com/v1_1/doe3ftnti/image/upload",
       formData
-    );
+    ); //Get the key from the dpocumentation of cloudinary (Api Reference)
     const uploadedImageData = uploadResponse.data;
 
     // console.log(uploadedImageData.secure_url);

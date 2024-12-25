@@ -3,7 +3,7 @@ import UserContext from "@/context/userContext";
 import Link from "next/link";
 import { useContext, useEffect, useRef, useState } from "react";
 import { CiHeart, CiShoppingCart } from "react-icons/ci";
-import { FaBars, FaShoppingCart } from "react-icons/fa";
+import { FaBars, FaHeart, FaShoppingCart } from "react-icons/fa";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { FiSearch } from "react-icons/fi";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -26,10 +26,6 @@ const Navabar = () => {
 
   const toggleHandle = () => {
     setToggle(!toggle);
-  };
-
-  const logoClick = () => {
-    window.location.reload();
   };
 
   const toggleDropDown = (dropdown: any) => {
@@ -61,8 +57,13 @@ const Navabar = () => {
           Gadget's World
         </div>
         <div className="flex items-center justify-center gap-3 lg:hidden">
-          <CiHeart size={25} color="red" />
-          <FaShoppingCart color="lightgreen" size={25} />
+          <Link href="/favourites">
+            {" "}
+            <FaHeart size={22} fill="red" />
+          </Link>
+          <Link href={`/${context?.user?.data?.email}/cart`}>
+            <FaShoppingCart color="lightgreen" size={25} />
+          </Link>
         </div>
         <div className="hidden lg:block">
           <SearchBar />
@@ -146,24 +147,24 @@ const Navabar = () => {
           <SearchBar />
 
           <div className="space-y-5">
-            <Link href="/category">
+            <Link href="/category/phones">
               <div className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold">
-                Category
+                Mobiles
               </div>
             </Link>
-            <Link href="/brands">
+            <Link href="/category/laptops">
               <div className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold">
-                Brands
+                Laptops
               </div>
             </Link>
-            <Link href="/best-deals">
+            <Link href="/category/tablets">
               <div className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold">
-                Best Deals
+                Tablets
               </div>
             </Link>
-            <Link href="/offers">
+            <Link href="/category/headphones">
               <div className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold">
-                Bumper Offers
+                Headphones
               </div>
             </Link>
             <Link href="/contact">
@@ -172,20 +173,23 @@ const Navabar = () => {
               </div>
             </Link>
           </div>
-          <div className="flex items-center gap-2  rounded-lg  cursor-pointer">
-            <CiHeart size={25} color="red" stroke="red" />
-            <p>
-              <span className="select-none">Favourites</span>
-              <span> (0)</span>
-            </p>
-          </div>
-          <div className="flex items-center gap-2 cursor-pointer rounded-lg">
-            <CiShoppingCart size={25} color="green" />
-            <p>
-              <span className="select-none">Cart</span>
-              <span> (0)</span>
-            </p>
-          </div>
+
+          <Link href="/favourites">
+            <div className="flex items-center gap-2  rounded-lg  cursor-pointer pt-5 pb-3">
+              <CiHeart size={25} color="red" stroke="red" />
+              <p>
+                <span className="select-none">Favourites</span>
+              </p>
+            </div>
+          </Link>
+          <Link href={`/${context?.user?.data.email}/cart`}>
+            <div className="flex items-center gap-2 cursor-pointer rounded-lg">
+              <CiShoppingCart size={25} color="green" />
+              <p>
+                <span className="select-none">Cart</span>
+              </p>
+            </div>
+          </Link>
           <div className="flex items-center gap-2 bg-gray-800 w-fit  px-4 py-2 rounded-lg cursor-pointer">
             {" "}
             {context.user && (

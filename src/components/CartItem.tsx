@@ -31,6 +31,7 @@ const CartItem = ({ data }: { data: CartItemProps[] }) => {
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const context = useContext(UserContext) as any;
   const queryClient = useQueryClient();
+  console.log(context);
 
   const plusHandler = async (key: any) => {
     setLoadingId(key);
@@ -163,18 +164,18 @@ const CartItem = ({ data }: { data: CartItemProps[] }) => {
 
   return (
     <>
-      <div className="grid lg:grid-cols-3  px-8 lg:px-10 space-x-5 min-h-[70dvh]">
-        <div className="col-span-2 space-y-6 py-6">
+      <div className="grid lg:grid-cols-3 grid-cols-1  px-4 lg:px-10 space-x-5 min-h-[70dvh]">
+        <div className="lg:col-span-2 space-y-6 py-6">
           {data.map((cartItem: CartItemProps) => {
             return (
               <div className="" key={cartItem._id}>
                 <div className=" grid grid-cols-2 space-x-14 relative">
-                  <div className="bg-violet-50 px-2 py-2 rounded-md">
+                  <div className="bg-violet-50 px-2 py-2 rounded-md flex justify-center items-center">
                     <Image
                       src={cartItem.imageUrls[0]}
                       alt=""
-                      height={300}
-                      width={300}
+                      height={500}
+                      width={500}
                       className="w-[100px] h-[100px] lg:w-[250px] lg:h-[250px]"
                     />
                   </div>
@@ -187,9 +188,9 @@ const CartItem = ({ data }: { data: CartItemProps[] }) => {
                       <p>{cartItem.price}</p>
                       <LiaRupeeSignSolid size={30} />
                     </div>
-                    <div className="flex text-lg lg:text-2xl">
+                    <div className="flex text-lg lg:text-2xl w-full">
                       <button
-                        className="bg-black text-white px-2 py-1 rounded-l-lg"
+                        className="bg-black text-white px-2 py-1 rounded-l-lg w-8"
                         onClick={() => plusHandler(cartItem._id)}>
                         +
                       </button>
@@ -221,13 +222,14 @@ const CartItem = ({ data }: { data: CartItemProps[] }) => {
                       )}
                     </div>
                   </div>
-                  <div className="absolute right-6 bottom-1">
+                  <div className="lg:absolute lg:right-6 lg:bottom-1 hidden">
                     <MdDelete
                       size={25}
                       onClick={() => deleteHandler(cartItem._id)}
                     />
                   </div>
-                  <div className="absolute right-6 top-1">
+
+                  <div className="absolute top-1 lg:right-1 right-[8rem] z-1 0">
                     <Checkbox
                       color="success"
                       size="lg"
@@ -237,13 +239,15 @@ const CartItem = ({ data }: { data: CartItemProps[] }) => {
                       onChange={() => checkboxHandler(cartItem._id)}></Checkbox>
                   </div>
                 </div>
+
                 <hr />
               </div>
             );
           })}
         </div>
+
         {/*....................................... TOtal Bill Section.................................................. */}
-        <div className="h-auto lg:pt-8 px-5 ">
+        <div className="h-auto lg:pt-8 lg:px-5  lg:py-0 py-5">
           <h2 className=" flex justify-center text-2xl font-semibold  bg-purple-300 text-black py-1">
             {" "}
             Total Bill
