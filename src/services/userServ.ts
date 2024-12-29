@@ -104,3 +104,11 @@ export async function shippingAddressFn({ email, formData }: any) {
   });
   return response.data;
 }
+export async function deleteOrderFn({ orderId, userId, productId }: any) {
+  const response = await httpAxios.patch("/api/orderPlacedApi", {
+    orderId,
+    userId,
+    productId,
+  });
+  return response.data;
+}

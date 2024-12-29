@@ -21,7 +21,7 @@ const ManageAccount = () => {
   };
   return (
     <>
-      <div className="w-[200px] space-y-4 ">
+      <div className="w-[200px] space-y-4">
         <Link href={`/${context.user.data.email}/your-orders`}>
           <div className="hover:bg-green-500 hover:text-white px-3 rounded-md">
             Your Orders

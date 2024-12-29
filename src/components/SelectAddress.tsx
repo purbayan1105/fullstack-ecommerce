@@ -10,7 +10,7 @@ import { checkAtom, submitAtom } from "@/utils/atoms";
 import Payment from "./Payment";
 
 const SelectAddress = () => {
-  const [isChecked, setChecked] = useAtom(checkAtom);
+  const [isChecked, setChecked] = useState(false);
   const [isSubmitted, setSubmitted] = useAtom(submitAtom);
 
   const { data, isLoading, isFetched, isSuccess, isFetching, isError } =
@@ -56,7 +56,9 @@ const SelectAddress = () => {
               {isSubmitted ? (
                 <></>
               ) : (
-                <Checkbox onChange={onChangeHandler}></Checkbox>
+                <Checkbox
+                  onChange={onChangeHandler}
+                  isSelected={isChecked}></Checkbox>
               )}
 
               <div className="text-2xl font-semibold my-8 px-3">
@@ -73,7 +75,7 @@ const SelectAddress = () => {
             </div>
           </div>
         )}
-        {(isChecked === true || isSubmitted) && (
+        {(isChecked || isSubmitted) && (
           <div>
             <Payment />
           </div>

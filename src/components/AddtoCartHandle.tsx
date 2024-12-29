@@ -3,6 +3,7 @@ import UserContext from "@/context/userContext";
 import { addToCartFn } from "@/services/userServ";
 
 import { TabItemProps } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
 export type ContextProps = {
@@ -20,20 +21,25 @@ type CartItem = {
 };
 
 const AddToCartHandle = ({ product }: { product: any }) => {
+  const router = useRouter();
   const context = useContext(UserContext) as ContextProps;
 
   const addToCartHandler = async () => {
-    const email = context.user?.data?.email;
-    console.log(email);
+    if (context.user) {
+      const email = context.user?.data?.email;
+      console.log(email);
 
-    console.log({ ...product });
+      console.log({ ...product });
 
-    if (email && product) {
-      const result = await addToCartFn({
-        email,
-        product,
-      });
-      console.log(result); // For debugging or to show a success message
+      if (email && product) {
+        const result = await addToCartFn({
+          email,
+          product,
+        });
+        console.log(result); // For debugging or to show a success message
+      }
+    } else {
+      router.push("/login");
     }
   };
 

@@ -13,6 +13,7 @@ import UserContext from "@/context/userContext";
 
 import { getProducts } from "@/services/addProductServ";
 import { addToCartFn } from "@/services/userServ";
+import { useRouter } from "next/navigation";
 
 type ProductProps = {
   _id: string;
@@ -35,6 +36,8 @@ type ContextProps = {
 
 const page = () => {
   const params = useParams();
+
+  const router = useRouter();
   const { id } = params;
   const context = useContext(UserContext) as ContextProps;
   const { data, isLoading, isError } = useQuery({
@@ -53,7 +56,7 @@ const page = () => {
 
   if (isLoading)
     return (
-      <div>
+      <div className="min-h-screen">
         {" "}
         <Spinner
           className="flex justify-center items-center h-[60dvh]"
@@ -87,13 +90,22 @@ const page = () => {
         email,
         product,
       });
-      console.log(result); // For debugging or to show a success message
+
+      console.log(result);
+    } else {
+      router.push("/login");
     }
+  };
+
+  // Buy handler
+
+  const buyItemHandle = (id: any) => {
+    router.push(`/buy-item?id=${id}`);
   };
 
   return (
     <>
-      <div className="grid lg:grid-cols-2 grid-cols-1 lg:px-10 px-8 space-x-5 mt-5">
+      <div className="grid lg:grid-cols-2 grid-cols-1 lg:px-10 px-8 space-x-5 mt-5 min-h-screen">
         <div className="col-span-1 bg-gray-100 h-[60dvh]">
           <Slider {...imageSettings}>
             {data.imageUrls.map((imageUrl: string, index: number) => {
@@ -118,7 +130,9 @@ const page = () => {
           </div>
           <div className="text-xl font-normal">{data.description}</div>
           <div className="space-x-5">
-            <button className="bg-black text-white text-xl px-4 py-3 rounded-lg">
+            <button
+              className="bg-black text-white text-xl px-4 py-3 rounded-lg"
+              onClick={() => buyItemHandle(data._id)}>
               Buy Now
             </button>
             <button

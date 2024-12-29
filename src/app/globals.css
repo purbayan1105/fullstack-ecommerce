@@ -35,3 +35,19 @@ body {
     opacity: 1;
   }
 }
+
+.animate-dropdown {
+  animation: fadeInDown 0.5s forwards ease-in;
+  opacity: 0;
+}
+
+@keyframes fadeInDown {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}

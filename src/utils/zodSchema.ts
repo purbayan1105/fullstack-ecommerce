@@ -14,12 +14,17 @@ export const ZodSchema = z
     email: z.string().email({ message: "It's not a valid email" }),
     password: z
       .string()
-      .min(4, { message: "Minmum 4 characters" })
-      .max(8, { message: "Maximum 8 characters" }),
+      .min(8, { message: "Minmum 8 characters" })
+      .max(16, { message: "Maximum 8 characters" })
+      .regex(/[a-zA-Z]/, { message: "Must include at least one letter" })
+      .regex(/\d/, { message: "Must include at least one number" })
+      .regex(/[^a-zA-Z0-9]/, {
+        message: "Must include at least one special character",
+      }),
     confirmPassword: z
       .string()
-      .min(4, { message: "Minmum 4 characters" })
-      .max(8, { message: "Maximum 8 characters" }),
+      .min(8, { message: "Minmum 8 characters" })
+      .max(16, { message: "Maximum 16 characters" }),
 
     profile: z.string().optional(),
     imageUrl: z.string().optional(),

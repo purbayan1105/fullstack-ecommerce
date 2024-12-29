@@ -64,12 +64,18 @@ const Page = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="py-6">
-        <div className="flex flex-col justify-center items-center h-screen space-y-5 ">
+        <div className="flex flex-col justify-center items-center min-h-screen space-y-5 ">
           <div className="text-3xl font-semibold">
             User
             <span className="text-blue-800"> Sign Up</span> Form
           </div>
-          <Image src={usersignup} width={100} height={100} alt="usersignup" />
+          <Image
+            src={usersignup}
+            width={100}
+            height={100}
+            alt="usersignup"
+            loading="lazy"
+          />
 
           <input
             type="text"

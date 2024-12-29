@@ -1,4 +1,5 @@
 import mongoose, { Schema, Types } from "mongoose";
+import { OrderSchema } from "./OrderModel";
 
 const OtpDetailsSchema = new Schema({
   verificationCode: {
@@ -114,6 +115,7 @@ export const UserModel = new Schema({
   addToCart: [CartItemSchema],
   favouriteItems: [FavouriteItemSchema],
   shippingAddress: AddressSchema,
+  placedOrders: [OrderSchema],
 });
 
 export const User = mongoose.models.user || mongoose.model("user", UserModel);

@@ -10,9 +10,13 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import ManageAccount from "./ManageAccount";
 import SearchBar from "./SearchBar";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Navabar = () => {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const [dropdowns, setDropdowns] = useState({
     favdropdown: false,
@@ -21,8 +25,6 @@ const Navabar = () => {
   });
 
   const context = useContext(UserContext) as any;
-
-  const toggleRef = useRef<HTMLDivElement>(null);
 
   const toggleHandle = () => {
     setToggle(!toggle);
@@ -34,21 +36,11 @@ const Navabar = () => {
       [dropdown]: !prevState[dropdown],
     }));
   };
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        toggleRef.current &&
-        !toggleRef.current.contains(event.target as Node)
-      ) {
-        setToggle(false);
 
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
-        };
-      }
-    };
-  }, []);
+  const toggleDivOnClick = (route: string) => {
+    router.push(route);
+    setToggle(false);
+  };
 
   return (
     <>
@@ -79,14 +71,9 @@ const Navabar = () => {
             <Link href="/favourites">
               <p>Favourites</p>
             </Link>
-            {dropdowns.favdropdown ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </div>
-          <Link href={`/${context?.user?.data.email}/cart`}>
-            <div
-              className="flex items-center gap-2 bg-indigo-50 px-3 py-2 rounded-lg cursor-pointer select-none"
-              onClick={() => {
-                toggleDropDown("cartdropdown");
-              }}>
+          <Link href={`/${context?.user?.data?.email}/cart`}>
+            <div className="flex items-center gap-2 bg-indigo-50 px-3 py-2 rounded-lg cursor-pointer select-none">
               <CiShoppingCart size={25} color="green" />
               <p>Cart</p>
             </div>
@@ -98,13 +85,13 @@ const Navabar = () => {
             }}>
             {context.user && (
               <img
-                src={context.user.data.imageUrl}
+                src={context?.user?.data?.imageUrl}
                 alt=""
                 className="w-8 rounded-full h-8"
               />
             )}
             {context?.user ? (
-              <p>{context.user.data.firstName}</p>
+              <p>{context.user?.data?.firstName}</p>
             ) : (
               <Link href="/login">
                 {" "}
@@ -124,7 +111,7 @@ const Navabar = () => {
             )}
 
             {dropdowns.accoutdropdown && context.user && (
-              <div className="absolute bg-slate-200 top-10 right-5 rounded-lg px-3 py-3">
+              <div className="absolute bg-slate-200 top-14 right-0 rounded-lg px-3 py-3 animate-dropdown">
                 <ManageAccount />
               </div>
             )}
@@ -141,75 +128,103 @@ const Navabar = () => {
 
       {/* For Mobile */}
       {toggle && (
-        <div
-          ref={toggleRef}
-          className="space-y-8 text-xl absolute z-20 top-20 bg-gray-100 w-full px-6 py-6">
+        <div className="space-y-8 text-xl absolute z-20 top-20 bg-gray-100 w-full px-6 py-6">
           <SearchBar />
 
           <div className="space-y-5">
-            <Link href="/category/phones">
-              <div className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold">
-                Mobiles
-              </div>
-            </Link>
-            <Link href="/category/laptops">
-              <div className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold">
-                Laptops
-              </div>
-            </Link>
-            <Link href="/category/tablets">
-              <div className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold">
-                Tablets
-              </div>
-            </Link>
-            <Link href="/category/headphones">
-              <div className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold">
-                Headphones
-              </div>
-            </Link>
-            <Link href="/contact">
-              <div className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold">
-                contact
-              </div>
-            </Link>
+            <div
+              className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold"
+              onClick={() => toggleDivOnClick("/")}>
+              Home
+            </div>
+
+            <div
+              className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold"
+              onClick={() => toggleDivOnClick("/category/phones")}>
+              Mobiles
+            </div>
+
+            <div
+              className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold"
+              onClick={() => toggleDivOnClick("/category/laptops")}>
+              Laptops
+            </div>
+
+            <div
+              className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold"
+              onClick={() => toggleDivOnClick("/category/tablets")}>
+              Tablets
+            </div>
+
+            <div
+              className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold"
+              onClick={() => toggleDivOnClick("/category/headphones")}>
+              Headphones
+            </div>
+
+            <div
+              className="py-2 hover:bg-slate-400 rounded-md pl-2 font-semibold"
+              onClick={() => toggleDivOnClick("/contact")}>
+              contact
+            </div>
           </div>
 
-          <Link href="/favourites">
-            <div className="flex items-center gap-2  rounded-lg  cursor-pointer pt-5 pb-3">
-              <CiHeart size={25} color="red" stroke="red" />
-              <p>
-                <span className="select-none">Favourites</span>
-              </p>
-            </div>
-          </Link>
-          <Link href={`/${context?.user?.data.email}/cart`}>
-            <div className="flex items-center gap-2 cursor-pointer rounded-lg">
-              <CiShoppingCart size={25} color="green" />
-              <p>
-                <span className="select-none">Cart</span>
-              </p>
-            </div>
-          </Link>
+          <div
+            className="flex items-center gap-2  rounded-lg  cursor-pointer pt-5 pb-3"
+            onClick={() => toggleDivOnClick("/favourites")}>
+            <CiHeart size={25} color="red" stroke="red" />
+            <p>
+              <span className="select-none">Favourites</span>
+            </p>
+          </div>
+
+          <div
+            className="flex items-center gap-2 cursor-pointer rounded-lg"
+            onClick={() =>
+              toggleDivOnClick(`/${context?.user?.data?.email}/cart`)
+            }>
+            <CiShoppingCart size={25} color="green" />
+            <p>
+              <span className="select-none">Cart</span>
+            </p>
+          </div>
+
           <div className="flex items-center gap-2 bg-gray-800 w-fit  px-4 py-2 rounded-lg cursor-pointer">
-            {" "}
-            {context.user && (
-              <img
-                src={context.user.data.imageUrl}
-                alt=""
-                className="w-8 rounded-full h-8"
-              />
-            )}
-            {context?.user ? (
-              <p className="text-white select-none">
-                {context.user.data.firstName}
-              </p>
+            {context.user ? (
+              <button
+                className="flex justify-center items-center h-12 text-white gap-3"
+                onClick={() => {
+                  toggleDropDown("accoutdropdown");
+                }}>
+                <Image
+                  src={context.user.data.imageUrl}
+                  alt="DP"
+                  height={100}
+                  width={100}
+                  className="w-[3rem] h-[3rem] rounded-full"
+                />
+                <p>{context.user.data.firstName}</p>
+                <div className="">
+                  {dropdowns.accoutdropdown ? (
+                    <IoIosArrowUp />
+                  ) : (
+                    <IoIosArrowDown />
+                  )}
+                </div>
+              </button>
             ) : (
-              <Link href="/login">
-                {" "}
-                <p className="text-white select-none">Log in</p>
-              </Link>
+              <button
+                className="flex justify-center items-center h-8 text-white gap-3 w-32"
+                onClick={() => toggleDivOnClick("/login")}>
+                Login
+              </button>
             )}
-            {context.user ? <IoIosArrowDown color="white" /> : ""}
+
+            {dropdowns.accoutdropdown && context.user && (
+              <div className="absolute bg-slate-200 bottom-[6rem] left-4 rounded-lg px-3 py-3 z-30 animate-dropdown">
+                <ManageAccount />
+              </div>
+            )}
           </div>
         </div>
       )}

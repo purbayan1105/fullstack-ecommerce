@@ -4,8 +4,10 @@ import { useContext, useEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { ContextProps } from "./AddtoCartHandle";
 import { favaddFn, getFavouriteProduct } from "@/services/userServ";
+import { useRouter } from "next/navigation";
 
 const Heart = ({ product }: any) => {
+  const router = useRouter();
   const context = useContext(UserContext) as ContextProps;
   const queryClient = useQueryClient();
   const [targetedItem, setTargetedItem] = useState<any>(null);
@@ -32,13 +34,17 @@ const Heart = ({ product }: any) => {
   }, [data, product.sku]);
 
   const favHanlder = async (id: any) => {
-    await favaddFn({
-      email: context.user.data.email,
-      product,
-    });
-    console.log(product);
+    if (context.user) {
+      await favaddFn({
+        email: context.user.data.email,
+        product,
+      });
+      console.log(product);
 
-    queryClient.refetchQueries();
+      queryClient.refetchQueries();
+    } else {
+      router.push("/login");
+    }
   };
 
   // const targetedItem = data?.find((item: any) => item === product._id);
