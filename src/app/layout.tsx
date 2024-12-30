@@ -10,6 +10,15 @@ import { Providers } from "@/components/NextUIProvider/Provider";
 import Menubar from "@/components/Menubar";
 import Footer from "@/components/Footer";
 
+import { Arimo, Exo_2, Karla, Noto_Serif } from "next/font/google";
+
+const poppins = Exo_2({
+  weight: ["400"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--var-poppins",
+});
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -35,7 +44,7 @@ export default function RootLayout({
     <ReactQueryComponent>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}>
           <Providers>
             <UserProvider>
               <Navabar />
