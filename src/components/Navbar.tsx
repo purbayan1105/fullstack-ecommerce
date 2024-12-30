@@ -45,7 +45,9 @@ const Navabar = () => {
   return (
     <>
       <div className="grid grid-cols-4 lg:grid-cols-3 items-center gap-5 justify-end pr-8 pl-6 bg-gradient-to-br from-indigo-700 via-indigo-400 to-indigo-800 h-20">
-        <div className="text-xl lg:text-4xl font-bold  capriola text-slate-900 col-span-2 lg:col-span-1 poppins">
+        <div
+          className="text-xl lg:text-4xl font-bold  capriola text-slate-900 col-span-2 lg:col-span-1 poppins cursor-pointer"
+          onClick={() => router.push("/")}>
           Gadget's World
         </div>
         <div className="flex items-center justify-center gap-3 lg:hidden">
