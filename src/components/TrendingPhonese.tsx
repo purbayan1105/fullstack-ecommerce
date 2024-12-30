@@ -11,6 +11,7 @@ import Link from "next/link";
 import { getProducts } from "@/services/addProductServ";
 import AddToCartHandle from "./AddtoCartHandle";
 import Heart from "./Heart";
+import BuyNow from "./BuyNow";
 
 const Trending = () => {
   const [trendingPhones, setTrendingPhones] = useState([]);
@@ -83,12 +84,12 @@ const Trending = () => {
         Trending Phones
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:space-x-5 space-y-5 lg:space-y-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:space-x-5 space-y-5 lg:space-y-0 ">
         {trendingPhones.map((phone: any, index: number) => (
           <div
             key={index}
-            className="bg-white px-3 py-3 rounded-lglg:w-auto h-auto space-y-8 shadow-lg rounded-md relative">
-            <div className="h-[50%] my-3">
+            className="bg-white px-3 py-3 rounded-lglg:w-auto h-[90dvh] space-y-8 shadow-lg rounded-md relative">
+            <div className="h-[40%] my-3">
               <Slider {...imageSettings}>
                 {phone.imageUrls.map((imageUrl: any, index: number) => (
                   <Image
@@ -97,7 +98,7 @@ const Trending = () => {
                     width={300}
                     height={400}
                     key={index}
-                    className="w-[250px] h-[300px] flex mx-auto"
+                    className="w-[150px] h-[250px] flex mx-auto"
                   />
                 ))}
               </Slider>
@@ -120,6 +121,9 @@ const Trending = () => {
             </Link>{" "}
             <div className="mt-auto flex items-center">
               <AddToCartHandle product={phone} />
+            </div>
+            <div className=" flex items-center">
+              <BuyNow productId={phone._id} />
             </div>
             <div className="absolute z-10 right-1 top-1">
               <Heart product={phone} />

@@ -13,7 +13,7 @@ import { useAtom } from "jotai";
 import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
-import { useContext, useState } from "react";
+import { Suspense, useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 const page = () => {
@@ -22,11 +22,9 @@ const page = () => {
   const context = useContext(userContext) as any;
   const router = useRouter();
 
-  const params = useParams();
-
   //   id is not a part of the string so,
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  const params = useParams();
+  const { id } = params;
 
   console.log("id", id);
 

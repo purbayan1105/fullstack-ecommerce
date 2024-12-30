@@ -11,6 +11,7 @@ import Heart from "@/components/Heart";
 import { getProducts } from "@/services/addProductServ";
 import AddToCartHandle from "@/components/AddtoCartHandle";
 import { Spinner } from "@nextui-org/react";
+import BuyNow from "@/components/BuyNow";
 
 const page = () => {
   const { data, isLoading, isError } = useQuery({
@@ -67,9 +68,7 @@ const page = () => {
                   <div className="space-y-3">
                     <AddToCartHandle product={laptop} />
 
-                    <button className="text-lg border-2 border-black border-solid text-whoite px-3 py-2 rounded-lg w-full ">
-                      Buy Now
-                    </button>
+                    <BuyNow productId={laptop._id} />
                   </div>
                 </div>
                 <div className="absolute z-10 right-2 top-1">

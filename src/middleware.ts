@@ -20,17 +20,27 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // API routes protection
+  if (pathname === "/favourites") {
+    if (!userAuthToken) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
 
+  // API routes protection
+  if (pathname.startsWith("/buy-item")) {
+    if (!userAuthToken) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
   // Dynamic user cart page protection
-  const userCartRegex = /^\/[^/]+\/cart$/; // Matches "/{email}/cart"
+  const userCartRegex = /^\/[^/]+\/cart$/;
   if (userCartRegex.test(pathname)) {
     if (!userAuthToken) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
   }
 
-  return NextResponse.next(); // Allow the request to continue if no conditions are met
+  return NextResponse.next();
 }
 
 export const config = {
@@ -39,6 +49,8 @@ export const config = {
     "/admin/:path*",
     "/api/addtocartApi",
     "/api/favouriteApi",
-    "/:path*/cart", // Matches dynamic cart paths like "/[email]/cart"
+    "/:path*/cart", // Matches dynamic cart paths like "/[email]/cart",
+    "/favourites",
+    "/buy-item/:path*",
   ],
 };

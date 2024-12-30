@@ -73,7 +73,7 @@ const page = () => {
   };
   return (
     <>
-      <div className="text-3xl font-semibold capriola text-center mt-5 ">
+      <div className="text-3xl font-semibold capriola text-center mt-5 py-6">
         Order Items
       </div>
       <p className="mx-16 text-orange-600">
@@ -94,7 +94,7 @@ const page = () => {
                       alt=""
                       height={400}
                       width={300}
-                      className=""
+                      className="w-[250px] h-[300px]"
                     />
                     <div className="space-y-8">
                       <div className="text-2xl font-semibold">

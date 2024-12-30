@@ -100,7 +100,7 @@ const page = () => {
   // Buy handler
 
   const buyItemHandle = (id: any) => {
-    router.push(`/buy-item?id=${id}`);
+    router.push(`${id}/buy-item`);
   };
 
   return (

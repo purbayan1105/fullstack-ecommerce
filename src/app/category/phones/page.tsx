@@ -9,6 +9,7 @@ import Link from "next/link";
 import AddToCartHandle from "@/components/AddtoCartHandle";
 import { getProducts } from "@/services/addProductServ";
 import { Spinner } from "@nextui-org/react";
+import BuyNow from "@/components/BuyNow";
 
 const page = () => {
   const { data, isLoading, isError } = useQuery({
@@ -65,9 +66,7 @@ const page = () => {
                   </Link>
                   <div className="space-y-3">
                     <AddToCartHandle product={phone} />
-                    <button className="text-lg border-2 border-black border-solid text-whoite px-3 py-2 rounded-lg w-full ">
-                      Buy Now
-                    </button>
+                    <BuyNow productId={phone._id} />
                   </div>
                 </div>
               </div>

@@ -138,16 +138,13 @@ const CartItem = ({ data }: { data: CartItemProps[] }) => {
 
   //CHECKBOX Function................................................................
 
-  const [isSelected, setSelected] = useState<Record<string, boolean>>({});
   const checkboxHandler = async (id: any) => {
     console.log(id);
-    setSelected((prevSelected: any) => ({
-      ...prevSelected,
-      [id]: !prevSelected[id],
-    }));
+
+    const targetedItem = data.find((item: CartItemProps) => item._id === id);
 
     const email = context.user.data.email;
-    const isChecked = !isSelected[id];
+    const isChecked = !targetedItem?.isChecked;
 
     const result = await checkBoxFn({
       email,
@@ -157,10 +154,6 @@ const CartItem = ({ data }: { data: CartItemProps[] }) => {
     });
     queryClient.refetchQueries();
   };
-
-  useEffect(() => {
-    console.log("selection", isSelected);
-  }, [isSelected]);
 
   return (
     <>
@@ -234,8 +227,7 @@ const CartItem = ({ data }: { data: CartItemProps[] }) => {
                       color="success"
                       size="lg"
                       key={cartItem._id}
-                      defaultSelected
-                      isSelected={cartItem.isChecked ? true : false}
+                      isSelected={cartItem.isChecked}
                       onChange={() => checkboxHandler(cartItem._id)}></Checkbox>
                   </div>
                 </div>

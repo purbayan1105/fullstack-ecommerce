@@ -56,9 +56,12 @@ const Tablet = () => {
             supported
           </div>
           <div className="mt-8 space-x-5">
-            <button className="bg-black rounded-full px-4 py-3 text-xl text-white font-semibold">
-              Buy Now
-            </button>
+            <Link href="allproducts/676ecebe2814f7ac4843301c">
+              {" "}
+              <button className="bg-black rounded-full px-4 py-3 text-xl text-white font-semibold">
+                Buy Now
+              </button>
+            </Link>
 
             <Link href="/category/tablets">
               <button className="border-2 border-solid border-black px-4 py-3 rounded-full">
