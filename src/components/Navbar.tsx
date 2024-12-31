@@ -224,7 +224,7 @@ const Navabar = () => {
 
             {dropdowns.accoutdropdown && context.user && (
               <div className="absolute bg-slate-200 bottom-[6rem] left-4 rounded-lg px-3 py-3 z-30 animate-dropdown">
-                <ManageAccount />
+                <ManageAccount toggle={toggle} setToggle={setToggle} />
               </div>
             )}
           </div>

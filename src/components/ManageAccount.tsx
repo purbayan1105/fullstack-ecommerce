@@ -6,7 +6,12 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 
-const ManageAccount = () => {
+type ManageAccountProps = {
+  toggle: boolean;
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const ManageAccount = ({ toggle, setToggle }: ManageAccountProps) => {
   const context = useContext(UserContext) as any;
   const router = useRouter();
   const logoutBtnHandle = async () => {
@@ -19,20 +24,32 @@ const ManageAccount = () => {
       console.log("error at manage accounts page", error);
     }
   };
+
+  const toggleDivHandle = (route: any) => {
+    router.push(route);
+    setToggle(false);
+  };
   return (
     <>
       <div className="w-[200px] space-y-4">
-        <Link href={`/${context.user.data.email}/your-orders`}>
-          <div className="hover:bg-green-500 hover:text-white px-3 rounded-md">
-            Your Orders
-          </div>
-        </Link>
-        <Link href={`/manageaccount/${context?.user?.data?.email}`}>
-          {" "}
-          <div className="hover:bg-green-500 hover:text-white px-3 rounded-md">
-            Manage
-          </div>
-        </Link>
+        {/* <Link href={`/${context.user.data.email}/your-orders`}> */}
+        <div
+          className="hover:bg-green-500 hover:text-white px-3 rounded-md"
+          onClick={() =>
+            toggleDivHandle(`/${context.user.data.email}/your-orders`)
+          }>
+          Your Orders
+        </div>
+        {/* </Link> */}
+        {/* <Link href={`/manageaccount/${context?.user?.data?.email}`}> */}{" "}
+        <div
+          className="hover:bg-green-500 hover:text-white px-3 rounded-md"
+          onClick={() =>
+            toggleDivHandle(`/manageaccount/${context?.user?.data?.email}`)
+          }>
+          Manage
+        </div>
+        {/* </Link> */}
         <button
           className="bg-blue-500 hover:bg-green-500 hover:text-white px-3 rounded-md w-full"
           onClick={logoutBtnHandle}>
