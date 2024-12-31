@@ -6,6 +6,9 @@ const razorpay = new Razorpay({
   key_secret: process.env.RAZOR_PAY_KEY_SECRET,
 });
 
+console.log("Server RAZORPAY Key ID:", process.env.RAZOR_PAY_KEY_ID);
+console.log("Server RAZORPAY Key Secret:", process.env.RAZOR_PAY_KEY_SECRET);
+
 export async function POST(request: NextRequest) {
   try {
     const { amount, currency } = await request.json();
