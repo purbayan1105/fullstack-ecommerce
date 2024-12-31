@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Razorpay from "razorpay";
 
 const razorpay = new Razorpay({
-  key_id: process.env.RAZOR_PAY_KEY_ID as string,
+  key_id: process.env.RAZOR_PAY_KEY_ID as any,
   key_secret: process.env.RAZOR_PAY_KEY_SECRET,
 });
 
@@ -23,5 +23,3 @@ export async function POST(request: NextRequest) {
   }
   return NextResponse.json({ data: "error at payment api" }, { status: 501 });
 }
-
-export async function GET(request: NextRequest) {}
