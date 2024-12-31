@@ -40,6 +40,13 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  const userOrderregex = /^\/[^/]+\/your-orders$/;
+  if (userOrderregex.test(pathname)) {
+    if (!userAuthToken) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+
   return NextResponse.next();
 }
 
@@ -52,5 +59,6 @@ export const config = {
     "/:path*/cart", // Matches dynamic cart paths like "/[email]/cart",
     "/favourites",
     "/buy-item/:path*",
+    "/:path*/your-orders",
   ],
 };

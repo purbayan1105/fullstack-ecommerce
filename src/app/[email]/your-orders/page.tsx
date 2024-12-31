@@ -76,10 +76,10 @@ const page = () => {
       <div className="text-3xl font-semibold capriola text-center mt-5 py-6">
         Order Items
       </div>
-      <p className="mx-16 text-orange-600">
+      <p className="lg:mx-16 text-orange-600 mx-8">
         Total Ordered Items: <span className="font-semibold"></span>
       </p>
-      <div className="w-[60%]  mt-16 min-h-screen">
+      <div className="lg:w-[60%]  mt-16 min-h-screen mx-5">
         {data.map((item: any) => {
           return (
             <div key={item.orderId}>
@@ -87,14 +87,14 @@ const page = () => {
               {item.placedItems.map((placedItem: any) => {
                 return (
                   <div
-                    className="grid grid-cols-2 justify-start"
+                    className="grid grid-cols-1 lg:grid-cols-2 lg:justify-start mt-8"
                     key={placedItem._id}>
                     <Image
                       src={placedItem.imageUrls[0]}
                       alt=""
                       height={400}
                       width={300}
-                      className="w-[250px] h-[300px]"
+                      className="lg:w-[250px] lg:h-[300px] w-[200px] h-[200px]"
                     />
                     <div className="space-y-8">
                       <div className="text-2xl font-semibold">
@@ -114,6 +114,8 @@ const page = () => {
                         Cancel Order
                       </button>
                     </div>
+
+                    <div className="h-[0.1rem] w-full bg-gray-600 my-3"></div>
                   </div>
                 );
               })}

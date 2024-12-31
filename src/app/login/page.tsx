@@ -22,6 +22,7 @@ const page = () => {
       console.log(response.message);
 
       toast.success(response.message);
+      router.push("/");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
