@@ -32,24 +32,23 @@ const ManageAccount = ({ toggle, setToggle }: ManageAccountProps) => {
   return (
     <>
       <div className="w-[200px] space-y-4">
-        {/* <Link href={`/${context.user.data.email}/your-orders`}> */}
-        <div
-          className="hover:bg-green-500 hover:text-white px-3 rounded-md"
-          onClick={() =>
-            toggleDivHandle(`/${context.user.data.email}/your-orders`)
-          }>
-          Your Orders
+        <div className="">
+          <div
+            className="hover:bg-green-500 hover:text-white px-3 rounded-md"
+            onClick={() =>
+              toggleDivHandle(`/${context.user.data.email}/your-orders`)
+            }>
+            Your Orders
+          </div>
+
+          <div
+            className="hover:bg-green-500 hover:text-white px-3 rounded-md"
+            onClick={() =>
+              toggleDivHandle(`/manageaccount/${context?.user?.data?.email}`)
+            }>
+            Manage
+          </div>
         </div>
-        {/* </Link> */}
-        {/* <Link href={`/manageaccount/${context?.user?.data?.email}`}> */}{" "}
-        <div
-          className="hover:bg-green-500 hover:text-white px-3 rounded-md"
-          onClick={() =>
-            toggleDivHandle(`/manageaccount/${context?.user?.data?.email}`)
-          }>
-          Manage
-        </div>
-        {/* </Link> */}
         <button
           className="bg-blue-500 hover:bg-green-500 hover:text-white px-3 rounded-md w-full"
           onClick={logoutBtnHandle}>

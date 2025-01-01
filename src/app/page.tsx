@@ -1,5 +1,6 @@
 import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
+import HeadPhones from "@/components/HeadPhones";
 import Macboook from "@/components/Macbook";
 import Tablet from "@/components/Tablet";
 
@@ -11,6 +12,7 @@ const page = () => {
       <Banner />
       <Trending />
       <Macboook />
+      <HeadPhones />
       <Tablet />
     </>
   );
