@@ -1,3 +1,5 @@
+"use client";
+
 import { FaGithub, FaLinkedin, FaReact, FaStackOverflow } from "react-icons/fa";
 import BackToStart from "./BackToStart";
 import { useRouter } from "next/navigation";
@@ -14,7 +16,7 @@ const Footer = () => {
         <div className="flex lg:justify-center gap-3 col-span-2 items-center">
           <FaReact size={25} />
           <span className="text-slate-300">Developer- </span>
-          <span> Purbayan Ghosh</span>
+          <span> &lt; Purbayan Ghosh/ &gt; </span>
         </div>
         <div className="flex lg:justify-center col-span-2 gap-2">
           <span> All Coyrights reserved ©</span>
