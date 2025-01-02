@@ -6,8 +6,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
+import { ManageAccountProps } from "./ManageAccount";
 
-const SearchBar = () => {
+const SearchBar = ({ toggle, setToggle }: ManageAccountProps) => {
   const router = useRouter();
 
   const [divisVisible, setdivIsVisbile] = useState(false);
@@ -72,6 +73,7 @@ const SearchBar = () => {
                     <div
                       onClick={() => {
                         router.push(`/allproducts/${item._id}`);
+                        setToggle(false);
                         setInput("");
                       }}>
                       {item.title}

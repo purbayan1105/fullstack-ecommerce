@@ -53,14 +53,14 @@ const Navabar = () => {
         <div className="flex items-center justify-center gap-3 lg:hidden">
           <Link href="/favourites">
             {" "}
-            <FaHeart size={22} fill="red" />
+            <CiHeart size={30} color="red" />
           </Link>
           <Link href={`/${context?.user?.data?.email}/cart`}>
-            <FaShoppingCart color="lightgreen" size={25} />
+            <FaShoppingCart size={30} color="lightgreen" />
           </Link>
         </div>
         <div className="hidden lg:block">
-          <SearchBar />
+          <SearchBar toggle={toggle} setToggle={setToggle} />
         </div>
 
         <div className="lg:flex justify-center items-center gap-5 hidden">
@@ -131,7 +131,7 @@ const Navabar = () => {
       {/* For Mobile */}
       {toggle && (
         <div className="space-y-8 text-xl absolute z-20 top-20 bg-gray-100 w-full px-6 py-6">
-          <SearchBar />
+          <SearchBar toggle={toggle} setToggle={setToggle} />
 
           <div className="space-y-5">
             <div

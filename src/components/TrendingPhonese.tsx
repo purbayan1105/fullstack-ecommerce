@@ -88,8 +88,8 @@ const Trending = () => {
         {trendingPhones.map((phone: any, index: number) => (
           <div
             key={index}
-            className="bg-white px-3 py-3 rounded-lglg:w-auto h-[90dvh] space-y-8 shadow-lg rounded-md relative">
-            <div className="h-[40%] my-3">
+            className="bg-white px-3 py-3 rounded-lglg:w-auto lg:h-[90dvh] min-h-[600px] space-y-8 shadow-lg rounded-md relative">
+            <div className="my-3">
               <Slider {...imageSettings}>
                 {phone.imageUrls.map((imageUrl: any, index: number) => (
                   <Image
@@ -119,10 +119,9 @@ const Trending = () => {
                 )}
               </div>
             </Link>{" "}
-            <div className="mt-auto flex items-center">
+            <div className="space-y-3">
+              {" "}
               <AddToCartHandle product={phone} />
-            </div>
-            <div className=" flex items-center">
               <BuyNow productId={phone._id} />
             </div>
             <div className="absolute z-10 right-1 top-1">

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 
-type ManageAccountProps = {
+export type ManageAccountProps = {
   toggle: boolean;
   setToggle: React.Dispatch<React.SetStateAction<boolean>>;
 };
