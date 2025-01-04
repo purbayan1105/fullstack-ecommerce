@@ -26,7 +26,10 @@ export async function POST(request: NextRequest) {
 
       user.favouriteItems = deletedFromFav;
       await user.save();
-      return NextResponse.json({ message: deletedFromFav }, { status: 201 });
+      return NextResponse.json(
+        { message: "Item deleted from favourites" },
+        { status: 201 }
+      );
     } else {
       user.favouriteItems.push({
         productId: product._id,
@@ -38,7 +41,10 @@ export async function POST(request: NextRequest) {
       });
 
       await user.save();
-      return NextResponse.json({ message: "success" }, { status: 200 });
+      return NextResponse.json(
+        { message: "Item added to favourites" },
+        { status: 200 }
+      );
     }
   } catch (error: any) {
     console.log(error);

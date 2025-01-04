@@ -5,6 +5,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { ContextProps } from "./AddtoCartHandle";
 import { favaddFn, getFavouriteProduct } from "@/services/userServ";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const Heart = ({ product }: any) => {
   const router = useRouter();
@@ -35,11 +36,12 @@ const Heart = ({ product }: any) => {
 
   const favHanlder = async (id: any) => {
     if (context.user) {
-      await favaddFn({
+      const response = await favaddFn({
         email: context.user.data.email,
         product,
       });
       console.log(product);
+      toast.success(response.message);
 
       queryClient.refetchQueries();
     } else {

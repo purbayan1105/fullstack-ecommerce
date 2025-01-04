@@ -5,6 +5,7 @@ import { addToCartFn } from "@/services/userServ";
 import { TabItemProps } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export type ContextProps = {
   user: {
@@ -36,7 +37,8 @@ const AddToCartHandle = ({ product }: { product: any }) => {
           email,
           product,
         });
-        console.log(result); // For debugging or to show a success message
+        console.log("Result", result); // For debugging or to show a success message
+        toast.success(result.message);
       }
     } else {
       router.push("/login");

@@ -125,7 +125,7 @@ export async function PATCH(request: NextRequest) {
 
       console.log("findUser", findItem);
 
-      return NextResponse.json({ message: "successful" }, { status: 200 });
+      return NextResponse.json({ message: " successful" }, { status: 200 });
     } catch (error: any) {
       console.log("error add to cart api, PATCH", error);
       return NextResponse.json({ message: error.message }, { status: 501 });
