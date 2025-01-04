@@ -12,24 +12,15 @@ import { getProducts } from "@/services/addProductServ";
 import AddToCartHandle from "./AddtoCartHandle";
 import Heart from "./Heart";
 import BuyNow from "./BuyNow";
+import { useAtom } from "jotai";
+import { productAtom } from "@/utils/atoms";
 
 const Trending = () => {
-  const [trendingPhones, setTrendingPhones] = useState([]);
-  useEffect(() => {
-    async function getTrendingPhones() {
-      let allProducts = await getProducts();
+  const [allProducts, setAllProducts] = useAtom(productAtom);
 
-      allProducts = allProducts.data;
-
-      const onlyPhones = allProducts.filter((product: any) => {
-        return product.category === "phones";
-      });
-      console.log(onlyPhones);
-      setTrendingPhones(onlyPhones);
-    }
-
-    getTrendingPhones();
-  }, []);
+  const trendingPhones = allProducts.filter((product: any) => {
+    return product.category === "phones";
+  });
 
   const imageSettings = {
     dots: true,

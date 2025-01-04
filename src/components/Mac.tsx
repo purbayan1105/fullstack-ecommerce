@@ -1,4 +1,7 @@
+import { productAtom } from "@/utils/atoms";
+import { useAtom } from "jotai";
 import Link from "next/link";
+import { useState } from "react";
 
 const Mac = ({ data }: any) => {
   return (

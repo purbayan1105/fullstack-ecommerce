@@ -1,7 +1,9 @@
 "use client";
 
 import { getProducts } from "@/services/addProductServ";
+import { productAtom } from "@/utils/atoms";
 import { useQuery } from "@tanstack/react-query";
+import { useAtom } from "jotai";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -17,17 +19,10 @@ export type TabletsProps = {
 };
 
 const Tablet = () => {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["tablet-fetching"],
-    queryFn: async () => {
-      const response = await getProducts();
-      const result = response.data;
-      const onlyTablets = result.filter((items: TabletsProps) => {
-        return items.category === "tablets";
-      });
+  const [allProducts, setAllProducts] = useAtom(productAtom);
 
-      return onlyTablets;
-    },
+  const onlyTablets = allProducts.filter((items: TabletsProps) => {
+    return items.category === "tablets";
   });
 
   const imageSettings = {
@@ -72,7 +67,7 @@ const Tablet = () => {
           </div>
         </div>
         <div className=" flex flex-col justify-end mt-6 lg:mt-0">
-          {data?.map((items: TabletsProps) => {
+          {onlyTablets?.map((items: TabletsProps) => {
             return (
               <div className="" key={items._id}>
                 <Slider {...imageSettings}>

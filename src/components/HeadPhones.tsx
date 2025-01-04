@@ -9,6 +9,9 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { getProducts } from "@/services/addProductServ";
+import { useAtom } from "jotai";
+import { productAtom } from "@/utils/atoms";
+import { ProductProps } from "@/utils/ProductType";
 
 type HeadPhoneProps = {
   title: string;
@@ -31,22 +34,11 @@ const settings = {
 };
 
 const HeadPhones = () => {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["headphones-fetching"],
-    queryFn: async () => {
-      const response = await getProducts();
-      const result = response.data;
+  const [allProducts, setAllProducts] = useAtom(productAtom);
 
-      const onlyHeadphones = result.filter(
-        (items: any) => items.category === "headphones"
-      );
-
-      return onlyHeadphones;
-    },
-  });
-  if (isLoading) {
-    return <>Loading...</>;
-  }
+  const onlyHeadphones = allProducts?.filter(
+    (items: ProductProps) => items.category === "headphones"
+  );
 
   const settings = {
     dots: true,
@@ -65,7 +57,7 @@ const HeadPhones = () => {
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-center px-10 h-auto lg:h-[80dvh] bg-gradient-to-br from-green-50 via-pink-50 to-blue-50 py-10">
         <Slider {...settings} className="">
-          {data.map((headphones: any) => {
+          {onlyHeadphones.map((headphones: ProductProps) => {
             return (
               <div className="space-y-3" key={headphones._id}>
                 <Image
@@ -80,7 +72,7 @@ const HeadPhones = () => {
                     {headphones.title}
                   </div>
                   <div className="flex items-center">
-                    <p>{data[0].price} </p>
+                    <p>{headphones.price} </p>
                     <FaRupeeSign />
                   </div>
                   <div className="">
@@ -90,7 +82,7 @@ const HeadPhones = () => {
                         <span className="font-semibold"> Know More...</span>
                       </>
                     ) : (
-                      data.description
+                      headphones.description
                     )}
                   </div>
                 </Link>
